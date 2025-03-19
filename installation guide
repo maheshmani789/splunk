@@ -1,0 +1,15 @@
+1master and 2 slave ec2 machines
+
+master
+splunk enterprise tar file: 
+wget -O splunk-9.4.1-e3bdab203ac8-linux-amd64.tgz "https://download.splunk.com/products/splunk/releases/9.4.1/linux/splunk-9.4.1-e3bdab203ac8-linux-amd64.tgz"
+port listening - 
+./splunk enable listen 8997
+
+slaves
+splunk universal forwarder tar file:
+wget -O splunkforwarder-9.4.1-e3bdab203ac8-linux-amd64.tgz "https://download.splunk.com/products/universalforwarder/releases/9.4.1/linux/splunkforwarder-9.4.1-e3bdab203ac8-linux-amd64.tgz"
+config of slave to master - ./splunk add forward-server <masterIP>:8997
+adding monitor path to master from slave - ./splunk add monitor /var/log/syslog -index main
+
+
